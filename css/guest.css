@@ -382,6 +382,7 @@ svg {
     width: 150px;      /* kecil & elegan */
     max-width: 40%;
     opacity: 0.9;
+    z-index: 1;
 }
 
 .meja-img {
@@ -506,6 +507,7 @@ svg {
         #4E7C59,
         transparent
     );
+    z-index: 3; 
 }
 /* .divider-long{
     width: 100%;
