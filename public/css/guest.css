@@ -366,13 +366,14 @@ svg {
 .wedding-date-section {
    position: relative;
     background: #fff;
-    padding: 190px 0 250px;
+    padding: 0 0 250px;
     overflow: hidden;
 }
 
 .content-wrapper {
     z-index: 2;
     position: relative;
+    margin-top: 200px;
 }
 
 .lampu-img {
@@ -382,7 +383,6 @@ svg {
     width: 150px;      /* kecil & elegan */
     max-width: 40%;
     opacity: 0.9;
-    z-index: 1;
 }
 
 .meja-img {
@@ -507,7 +507,8 @@ svg {
         #4E7C59,
         transparent
     );
-    z-index: 3; 
+    z-index: 5;
+    margin-top: 0;
 }
 /* .divider-long{
     width: 100%;
