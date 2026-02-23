@@ -52,7 +52,7 @@ export const card = (() => {
      */
     const renderLike = (c) => {
         return `
-        <button style="font-size: 0.8rem;" onclick="undangan.comment.like.love(this)" data-uuid="${c.uuid}" class="btn btn-sm btn-outline-auto ms-auto rounded-3 p-0 shadow-sm d-flex justify-content-start align-items-center" data-offline-disabled="false">
+        <button style="font-size: 12.8px;" onclick="undangan.comment.like.love(this)" data-uuid="${c.uuid}" class="btn btn-sm btn-outline-auto ms-auto rounded-3 p-0 shadow-sm d-flex justify-content-start align-items-center" data-offline-disabled="false">
             <span class="my-0 mx-1" data-count-like="${c.like_count}">${c.like_count}</span>
             <i class="me-1 ${likes.has(c.uuid) ? 'fa-solid fa-heart text-danger' : 'fa-regular fa-heart'}"></i>
         </button>`;
@@ -66,19 +66,19 @@ export const card = (() => {
         let action = `<div class="d-flex justify-content-start align-items-center" data-button-action="${c.uuid}">`;
 
         if (config.get('can_reply') !== false) {
-            action += `<button style="font-size: 0.8rem;" onclick="undangan.comment.reply('${c.uuid}')" class="btn btn-sm btn-outline-auto rounded-4 py-0 me-1 shadow-sm" data-offline-disabled="false">Reply</button>`;
+            action += `<button style="font-size: 12.8px;" onclick="undangan.comment.reply('${c.uuid}')" class="btn btn-sm btn-outline-auto rounded-4 py-0 me-1 shadow-sm" data-offline-disabled="false">Reply</button>`;
         }
 
         if (session.isAdmin() && c.is_admin && (!c.gif_url || gif.isActive())) {
-            action += `<button style="font-size: 0.8rem;" onclick="undangan.comment.edit(this, ${c.is_parent ? 'true' : 'false'})" data-uuid="${c.uuid}" class="btn btn-sm btn-outline-auto rounded-4 py-0 me-1 shadow-sm" data-own="${c.own}" data-offline-disabled="false">Edit</button>`;
+            action += `<button style="font-size: 12.8px;" onclick="undangan.comment.edit(this, ${c.is_parent ? 'true' : 'false'})" data-uuid="${c.uuid}" class="btn btn-sm btn-outline-auto rounded-4 py-0 me-1 shadow-sm" data-own="${c.own}" data-offline-disabled="false">Edit</button>`;
         } else if (owns.has(c.uuid) && config.get('can_edit') !== false && (!c.gif_url || gif.isActive())) {
-            action += `<button style="font-size: 0.8rem;" onclick="undangan.comment.edit(this, ${c.is_parent ? 'true' : 'false'})" data-uuid="${c.uuid}" class="btn btn-sm btn-outline-auto rounded-4 py-0 me-1 shadow-sm" data-offline-disabled="false">Edit</button>`;
+            action += `<button style="font-size: 12.8px;" onclick="undangan.comment.edit(this, ${c.is_parent ? 'true' : 'false'})" data-uuid="${c.uuid}" class="btn btn-sm btn-outline-auto rounded-4 py-0 me-1 shadow-sm" data-offline-disabled="false">Edit</button>`;
         }
 
         if (session.isAdmin()) {
-            action += `<button style="font-size: 0.8rem;" onclick="undangan.comment.remove(this)" data-uuid="${c.uuid}" class="btn btn-sm btn-outline-auto rounded-4 py-0 me-1 shadow-sm" data-own="${c.own}" data-offline-disabled="false">Delete</button>`;
+            action += `<button style="font-size: 12.8px;" onclick="undangan.comment.remove(this)" data-uuid="${c.uuid}" class="btn btn-sm btn-outline-auto rounded-4 py-0 me-1 shadow-sm" data-own="${c.own}" data-offline-disabled="false">Delete</button>`;
         } else if (owns.has(c.uuid) && config.get('can_delete') !== false) {
-            action += `<button style="font-size: 0.8rem;" onclick="undangan.comment.remove(this)" data-uuid="${c.uuid}" class="btn btn-sm btn-outline-auto rounded-4 py-0 me-1 shadow-sm" data-offline-disabled="false">Delete</button>`;
+            action += `<button style="font-size: 12.8px;" onclick="undangan.comment.remove(this)" data-uuid="${c.uuid}" class="btn btn-sm btn-outline-auto rounded-4 py-0 me-1 shadow-sm" data-offline-disabled="false">Delete</button>`;
         }
 
         action += '</div>';
@@ -95,7 +95,7 @@ export const card = (() => {
         uuid = util.escapeHtml(uuid);
 
         const hasId = showHide.get('show').includes(uuid);
-        return `<a class="text-theme-auto" style="font-size: 0.8rem;" onclick="undangan.comment.showOrHide(this)" data-uuid="${uuid}" data-uuids="${util.escapeHtml(uuids.join(','))}" data-show="${hasId ? 'true' : 'false'}" role="button" class="me-auto ms-1 py-0">${hasId ? 'Hide replies' : `Show replies (${uuids.length})`}</a>`;
+        return `<a class="text-theme-auto" style="font-size: 12.8px;" onclick="undangan.comment.showOrHide(this)" data-uuid="${uuid}" data-uuids="${util.escapeHtml(uuids.join(','))}" data-show="${hasId ? 'true' : 'false'}" role="button" class="me-auto ms-1 py-0">${hasId ? 'Hide replies' : `Show replies (${uuids.length})`}</a>`;
     };
 
     /**
@@ -122,8 +122,8 @@ export const card = (() => {
 
         return `
         <div class="mb-1 mt-3">
-            <p class="text-theme-auto mb-1 mx-0 mt-0 p-0" style="font-size: 0.7rem;" id="ip-${c.uuid}"><i class="fa-solid fa-location-dot me-1"></i>${util.escapeHtml(c.ip)} <span class="mb-1 placeholder col-2 rounded-3"></span></p>
-            <p class="text-theme-auto m-0 p-0" style="font-size: 0.7rem;"><i class="fa-solid fa-mobile-screen-button me-1"></i>${util.parseUserAgent(util.escapeHtml(c.user_agent))}</p>
+            <p class="text-theme-auto mb-1 mx-0 mt-0 p-0" style="font-size: 11.2px;" id="ip-${c.uuid}"><i class="fa-solid fa-location-dot me-1"></i>${util.escapeHtml(c.ip)} <span class="mb-1 placeholder col-2 rounded-3"></span></p>
+            <p class="text-theme-auto m-0 p-0" style="font-size: 11.2px;"><i class="fa-solid fa-mobile-screen-button me-1"></i>${util.parseUserAgent(util.escapeHtml(c.user_agent))}</p>
         </div>`;
     };
 
@@ -162,8 +162,8 @@ export const card = (() => {
     const renderBody = async (c) => {
         const head = `
         <div class="d-flex justify-content-between align-items-center">
-            <p class="text-theme-auto text-truncate m-0 p-0" style="font-size: 0.95rem;">${renderTitle(c)}</p>
-            <small class="text-theme-auto m-0 p-0" style="font-size: 0.75rem;">${c.created_at}</small>
+            <p class="text-theme-auto text-truncate m-0 p-0" style="font-size: 15.2px;">${renderTitle(c)}</p>
+            <small class="text-theme-auto m-0 p-0" style="font-size: 12px;">${c.created_at}</small>
         </div>
         <hr class="my-1">`;
 
@@ -178,8 +178,8 @@ export const card = (() => {
         const data = util.convertMarkdownToHTML(util.escapeHtml(moreMaxLength ? (c.comment.slice(0, maxCommentLength) + '...') : c.comment));
 
         return head + `
-        <p dir="auto" class="text-theme-auto my-1 mx-0 p-0" style="white-space: pre-wrap !important; font-size: 0.95rem;" data-comment="${util.base64Encode(c.comment)}" id="content-${c.uuid}">${data}</p>
-        ${moreMaxLength ? `<p class="d-block mb-2 mt-0 mx-0 p-0"><a class="text-theme-auto" role="button" style="font-size: 0.85rem;" data-show="false" onclick="undangan.comment.showMore(this, '${c.uuid}')">Selengkapnya</a></p>` : ''}`;
+        <p dir="auto" class="text-theme-auto my-1 mx-0 p-0" style="white-space: pre-wrap !important; font-size: 15.2px;" data-comment="${util.base64Encode(c.comment)}" id="content-${c.uuid}">${data}</p>
+        ${moreMaxLength ? `<p class="d-block mb-2 mt-0 mx-0 p-0"><a class="text-theme-auto" role="button" style="font-size: 13.6px;" data-show="false" onclick="undangan.comment.showMore(this, '${c.uuid}')">Selengkapnya</a></p>` : ''}`;
     };
 
     /**
@@ -222,7 +222,7 @@ export const card = (() => {
         inner.classList.add('my-2');
         inner.id = `inner-${id}`;
         const template = `
-        <p class="my-1 mx-0 p-0" style="font-size: 0.95rem;"><i class="fa-solid fa-reply me-2"></i>Reply</p>
+        <p class="my-1 mx-0 p-0" style="font-size: 15.2px;"><i class="fa-solid fa-reply me-2"></i>Reply</p>
         <div class="d-block mb-2" id="comment-form-${id}">
             <div class="position-relative">
                 ${!gif.isActive() ? '' : `<button class="btn btn-secondary btn-sm rounded-4 shadow-sm me-1 my-1 position-absolute bottom-0 end-0" onclick="undangan.comment.gif.open('${id}')" aria-label="button gif" data-offline-disabled="false"><i class="fa-solid fa-photo-film"></i></button>`}
@@ -231,8 +231,8 @@ export const card = (() => {
         </div>
         <div class="d-none mb-2" id="gif-form-${id}"></div>
         <div class="d-flex justify-content-end align-items-center mb-0">
-            <button style="font-size: 0.8rem;" onclick="undangan.comment.cancel(this, '${id}')" class="btn btn-sm btn-outline-auto rounded-4 py-0 me-1" data-offline-disabled="false">Cancel</button>
-            <button style="font-size: 0.8rem;" onclick="undangan.comment.send(this)" data-uuid="${id}" class="btn btn-sm btn-outline-auto rounded-4 py-0" data-offline-disabled="false">Send</button>
+            <button style="font-size: 12.8px;" onclick="undangan.comment.cancel(this, '${id}')" class="btn btn-sm btn-outline-auto rounded-4 py-0 me-1" data-offline-disabled="false">Cancel</button>
+            <button style="font-size: 12.8px;" onclick="undangan.comment.send(this)" data-uuid="${id}" class="btn btn-sm btn-outline-auto rounded-4 py-0" data-offline-disabled="false">Send</button>
         </div>`;
 
         return util.safeInnerHTML(inner, template);
@@ -252,17 +252,17 @@ export const card = (() => {
         inner.classList.add('my-2');
         inner.id = `inner-${id}`;
         const template = `
-        <p class="my-1 mx-0 p-0" style="font-size: 0.95rem;"><i class="fa-solid fa-pen me-2"></i>Edit</p>
+        <p class="my-1 mx-0 p-0" style="font-size: 15.2px;"><i class="fa-solid fa-pen me-2"></i>Edit</p>
         ${!is_parent ? '' : `
         <select class="form-select shadow-sm mb-2 rounded-4" id="form-inner-presence-${id}" data-offline-disabled="false">
-            <option value="1" ${presence ? 'selected' : ''}>&#9989; Datang</option>
-            <option value="2" ${presence ? '' : 'selected'}>&#10060; Berhalangan</option>
+            <option value="1" ${presence ? 'selected' : ''}>&#9989; Will Attend</option>
+            <option value="2" ${presence ? '' : 'selected'}>&#10060; Unable to Attend</option>
         </select>`}
         ${!is_gif ? `<textarea dir="auto" class="form-control shadow-sm rounded-4 mb-2" id="form-inner-${id}" minlength="1" maxlength="1000" placeholder="Type update comment" rows="3" data-offline-disabled="false"></textarea>    
         ` : `${!gif.isActive() ? '' : `<div class="d-none mb-2" id="gif-form-${id}"></div>`}`}
         <div class="d-flex justify-content-end align-items-center mb-0">
-            <button style="font-size: 0.8rem;" onclick="undangan.comment.cancel(this, '${id}')" class="btn btn-sm btn-outline-auto rounded-4 py-0 me-1" data-offline-disabled="false">Cancel</button>
-            <button style="font-size: 0.8rem;" onclick="undangan.comment.update(this)" data-uuid="${id}" class="btn btn-sm btn-outline-auto rounded-4 py-0" data-offline-disabled="false">Update</button>
+            <button style="font-size: 12.8px;" onclick="undangan.comment.cancel(this, '${id}')" class="btn btn-sm btn-outline-auto rounded-4 py-0 me-1" data-offline-disabled="false">Cancel</button>
+            <button style="font-size: 12.8px;" onclick="undangan.comment.update(this)" data-uuid="${id}" class="btn btn-sm btn-outline-auto rounded-4 py-0" data-offline-disabled="false">Update</button>
         </div>`;
 
         return util.safeInnerHTML(inner, template);

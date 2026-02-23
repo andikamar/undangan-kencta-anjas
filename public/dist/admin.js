@@ -77,8 +77,8 @@
         <p class="my-1 mx-0 p-0" style="font-size: 0.95rem;"><i class="fa-solid fa-pen me-2"></i>Edit</p>
         ${n?`
         <select class="form-select shadow-sm mb-2 rounded-4" id="form-inner-presence-${e}" data-offline-disabled="false">
-            <option value="1" ${t?"selected":""}>&#9989; Datang</option>
-            <option value="2" ${t?"":"selected"}>&#10060; Berhalangan</option>
+            <option value="1" ${t?"selected":""}>&#9989; Will Attend</option>
+            <option value="2" ${t?"":"selected"}>&#10060; Unable to Attend</option>
         </select>`:""}
         ${h?`${_.isActive()?`<div class="d-none mb-2" id="gif-form-${e}"></div>`:""}`:`<textarea dir="auto" class="form-control shadow-sm rounded-4 mb-2" id="form-inner-${e}" minlength="1" maxlength="1000" placeholder="Type update comment" rows="3" data-offline-disabled="false"></textarea>    
         `}

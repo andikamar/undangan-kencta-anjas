@@ -4,6 +4,8 @@
 html {
     scrollbar-width: none !important;
     -ms-overflow-style: none !important;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
 }
 
 .with-scrollbar {
@@ -300,7 +302,7 @@ svg {
 /* Title */
 .love-title {
     font-family: 'Playfair Display', serif;
-    font-size: 2.3rem;
+    font-size: 36.8px;
     color: #C88FA0; /* soft pink */
     line-height: 1.2;
     margin-bottom: 12px;
@@ -312,7 +314,7 @@ svg {
     background-color: #6D8F7A;
     color: white;
     font-family: 'Quicksand', sans-serif;
-    font-size: 0.8rem;
+    font-size: 12.8px;
     padding: 6px 16px;
     border-radius: 6px;
     margin-bottom: 10px;
@@ -350,7 +352,7 @@ svg {
 
 .phase-item h5 {
     font-family: 'Quicksand', sans-serif;
-    font-size: 0.85rem;
+    font-size: 13.6px;
     font-weight: 600;
     color: #8FA78E;
     margin-bottom: 6px;
@@ -358,7 +360,7 @@ svg {
 
 .phase-item p {
     font-family: 'Quicksand', sans-serif;
-    font-size: 0.8rem;
+    font-size: 12.8px;
     color: #D8929E;
     line-height: 1.6;
     margin: 0;
@@ -397,7 +399,7 @@ svg {
 
 .save-date-text {
    font-family: 'Allura', cursive;
-    font-size: 3.2rem;
+    font-size: 51.2px;
     color: #5f7d6d; /* sage green */
     font-weight: 400;
     margin-bottom: 8px;
@@ -405,7 +407,7 @@ svg {
 
 .bulan-text {
      font-family: 'Playfair Display', serif;
-    font-size: 0.85rem;
+    font-size: 13.6px;
     letter-spacing: 4px;
     color: #C88FA0; /* soft pink */
 }
@@ -416,7 +418,7 @@ svg {
     align-items: center;   /* bikin semua sejajar vertikal */
     gap: 22px;             /* jarak antar tanggal */
     font-family: 'Playfair Display', serif;
-    font-size: 1rem;
+    font-size: 16px;
     color: #C88FA0;
 }
 
@@ -445,14 +447,14 @@ svg {
 }
 
 .detail-text {
-    font-size: 0.9rem;
+    font-size: 14.4px;
     font-family: 'Playfair Display', serif;
     color: #C88FA0;
     line-height: 1.8;
 }
 
 .alamat-text {
-    font-size: 0.85rem;
+    font-size: 13.6px;
     font-family: 'Playfair Display', serif;
     color: #C88FA0;
     line-height: 1.8;
@@ -465,7 +467,7 @@ svg {
     color: white;
     border-radius: 6px;
     text-decoration: none;
-    font-size: 0.9rem;
+    font-size: 14.4px;
 }
 .gallery-frame{
     position: relative;
@@ -550,7 +552,7 @@ svg {
 }
 /* Title */
 .lovegift-title {
-    font-size: 2rem;
+    font-size: 32px;
     margin-bottom: 8px;
     font-family: 'Allura', cursive;
     color: #5f7d6d; /* sage green */
@@ -559,7 +561,7 @@ svg {
 
 /* Description */
 .lovegift-desc {
-    font-size: 0.85rem;
+    font-size: 13.6px;
     line-height: 1.6;
     margin-bottom: 20px;
     color: #4a4a4a;         /* abu gelap lembut */
@@ -592,7 +594,7 @@ svg {
 
 .rek-number {
     margin-top: 10px;
-    font-size: 0.9rem;
+    font-size: 14.4px;
     letter-spacing: 2px;
     color: #4a4a4a;
 }
@@ -603,31 +605,16 @@ svg {
 }
 @media (min-width: 768px) {
     .lovegift-desc {
-        font-size: 0.65rem;
+        font-size: 10.4px;
     }
     .bank-card {
         height: 50%;
     }
     .rek-number {
-        font-size: 0.65rem;
+        font-size: 10.4px
     }
 }
 
-
-.btn-copy {
-    background: #4a4a4a;
-    border: none;
-    border-radius: 10px;
-    padding: 6px 10px;
-    font-size: 0.8rem;
-    cursor: pointer;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
-    transition: 0.2s;
-}
-
-.btn-copy:hover {
-    background: #4a4a4a
-}
 
 .ornament-section {
     position: relative;
@@ -710,7 +697,7 @@ svg {
 
   font-family: 'Cormorant Garamond', serif;
   font-weight: 400;
-  font-size: 1.05rem;
+  font-size: 16.8px;
   line-height: 1.9;
 
   color: #b5838d;   /* dusty rose sesuai screenshot */
@@ -719,7 +706,7 @@ svg {
 }
 @media (min-width: 768px) {
     .ornament-text {
-         font-size: 0.95rem;
+         font-size: 15.2px;
     }
 }
 .scroll-indicator {

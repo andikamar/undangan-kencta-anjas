@@ -231,7 +231,7 @@ export const gif = (() => {
                 <div class="progress w-25" role="progressbar" style="height: 0.5rem;" aria-label="progress bar">
                     <div class="progress-bar" id="progress-bar-${uuid}" style="width: 0%"></div>
                 </div>
-                <small class="mt-1 text-theme-auto bg-theme-auto py-0 px-2 rounded-4" id="progress-info-${uuid}" style="font-size: 0.7rem;"></small>
+                <small class="mt-1 text-theme-auto bg-theme-auto py-0 px-2 rounded-4" id="progress-info-${uuid}" style="font-size: 11.2px;"></small>
             </div>
             <div id="gif-lists-${uuid}" class="d-flex rounded-4 p-0 overflow-y-scroll border" data-continue="true" style="height: 15rem;"></div>
         </div>

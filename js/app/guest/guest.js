@@ -84,7 +84,7 @@ export const guest = (() => {
 </small>
 
 <p class="m-0 p-0"
-    style="font-size: 1.25rem; font-family: 'Parisienne', cursive; color: #4E7C59;">
+    style="font-size: 20px; font-family: 'Parisienne', cursive; color: #4E7C59;">
     ${util.escapeHtml(name)}
 </p>`;
             util.safeInnerHTML(div, template);

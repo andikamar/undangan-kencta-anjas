@@ -105,7 +105,7 @@ export const offline = (() => {
         alert.innerHTML = `
         <div class="d-flex justify-content-center mx-auto">
             <div class="d-flex justify-content-center align-items-center rounded-pill my-2 bg-danger shadow">
-                <small class="text-center py-1 px-2 mx-1 mt-1 mb-0 text-white" style="font-size: 0.8rem;"></small>
+                <small class="text-center py-1 px-2 mx-1 mt-1 mb-0 text-white" style="font-size: 12.8px;"></small>
             </div>
         </div>`;
 
