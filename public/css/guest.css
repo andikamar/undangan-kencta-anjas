@@ -128,7 +128,7 @@ html[data-bs-theme="dark"] .color-theme-svg {
 }
 
 html[data-bs-theme="light"] .bg-light-dark {
-    background-color: rgb(var(--bs-light-rgb));
+    background-color: rgb(var(--bs-white-rgb));
 }
 
 html[data-bs-theme="dark"] .bg-light-dark {
