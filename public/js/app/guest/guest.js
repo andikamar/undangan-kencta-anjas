@@ -418,6 +418,9 @@ const pageLoaded = async () => {
     // 🔴 TAMBAHKAN INI
     document.addEventListener('undangan.progress.done', booting);
 
+    console.log('INIT COMMENT');
+    console.log(document.getElementById('comments'));
+
     document.dispatchEvent(new Event('undangan.session'));
 
     const vid = video.init();
