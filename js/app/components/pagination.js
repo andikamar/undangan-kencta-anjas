@@ -2,7 +2,7 @@ import { util } from '../../common/util.js';
 
 export const pagination = (() => {
 
-    let perPage = 10;
+    let perPage = 5;
     let pageNow = 0;
     let totalData = 0;
 
@@ -129,33 +129,35 @@ export const pagination = (() => {
      * @returns {void}
      */
     const setTotal = (len) => {
-        totalData = Number(len);
 
-        if (totalData <= perPage && pageNow === 0) {
-            paginate.classList.add('d-none');
-            return;
-        }
+    totalData = Number(len);
 
-        const current = (pageNow / perPage) + 1;
-        const total = Math.ceil(totalData / perPage);
+    // jika data <= perPage maka sembunyikan pagination
+    if (totalData <= perPage) {
+        paginate.classList.add('d-none');
+        return;
+    }
 
-        page.innerText = `${current} / ${total}`;
+    // jika data > perPage tampilkan pagination
+    paginate.classList.remove('d-none');
 
-        if (pageNow > 0) {
-            enablePrevious();
-        }
+    const current = (pageNow / perPage) + 1;
+    const total = Math.ceil(totalData / perPage);
 
-        if (current >= total) {
-            disableNext();
-            return;
-        }
+    page.innerText = `${current} / ${total}`;
 
+    if (pageNow > 0) {
+        enablePrevious();
+    } else {
+        disablePrevious();
+    }
+
+    if (current >= total) {
+        disableNext();
+    } else {
         enableNext();
-
-        if (paginate.classList.contains('d-none')) {
-            paginate.classList.remove('d-none');
-        }
-    };
+    }
+};
 
     /**
      * @returns {void}

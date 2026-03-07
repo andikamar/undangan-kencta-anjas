@@ -91,25 +91,20 @@ export const card = (() => {
      * @param {string[]} uuids
      * @returns {string}
      */
-    const renderReadMore = (uuid, uuids) => {
-        uuid = util.escapeHtml(uuid);
+   const renderReadMore = (uuid, uuids) => {
 
-        const hasId = showHide.get('show').includes(uuid);
-        return `<a class="text-theme-auto" style="font-size: 12.8px;" onclick="undangan.comment.showOrHide(this)" data-uuid="${uuid}" data-uuids="${util.escapeHtml(uuids.join(','))}" data-show="${hasId ? 'true' : 'false'}" role="button" class="me-auto ms-1 py-0">${hasId ? 'Hide replies' : `Show replies (${uuids.length})`}</a>`;
-    };
+    uuid = util.escapeHtml(uuid);
 
-    /**
-     * @param {ReturnType<typeof dto.getCommentResponse>} c
-     * @returns {string}
-     */
-    const renderButton = (c) => {
-        return `
-        <div class="d-flex justify-content-between align-items-center" id="button-${c.uuid}">
-            ${renderAction(c)}
-            ${c.comments.length > 0 ? renderReadMore(c.uuid, c.comments.map((i) => i.uuid)) : ''}
-            ${renderLike(c)}
-        </div>`;
-    };
+    return `
+    <a 
+        class="text-theme-auto"
+        style="font-size:0.8rem; cursor:pointer"
+        onclick="undangan.comment.showReplies('${uuid}')"
+        id="toggle-${uuid}">
+        Show replies (${uuids.length})
+    </a>
+    `;
+};
 
     /**
      * @param {ReturnType<typeof dto.getCommentResponse>} c
@@ -161,11 +156,21 @@ export const card = (() => {
      */
     const renderBody = async (c) => {
         const head = `
-        <div class="d-flex justify-content-between align-items-center">
-            <p class="text-theme-auto text-truncate m-0 p-0" style="font-size: 15.2px;">${renderTitle(c)}</p>
-            <small class="text-theme-auto m-0 p-0" style="font-size: 12px;">${c.created_at}</small>
-        </div>
-        <hr class="my-1">`;
+<div class="d-flex justify-content-between align-items-center">
+
+    <div>
+        <p class="text-theme-auto text-truncate m-0 p-0" style="font-size:0.95rem;">
+            ${renderTitle(c)}
+        </p>
+        <small class="text-theme-auto" style="font-size:0.75rem;">
+            ${c.created_at}
+        </small>
+    </div>
+
+    ${renderLike(c)}
+
+</div>
+<hr class="my-1">`;
 
         if (c.gif_url) {
             return head + `
@@ -187,17 +192,21 @@ export const card = (() => {
      * @returns {Promise<string>}
      */
     const renderContent = async (c) => {
-        const body = await renderBody(c);
-        const resData = await Promise.all(c.comments.map((cmt) => renderContent(cmt)));
 
-        return `
-        <div ${renderHeader(c)} id="${c.uuid}" style="overflow-wrap: break-word !important;">
-            <div id="body-content-${c.uuid}" data-tapTime="0" data-liked="false" tabindex="0">${body}</div>
-            ${renderTracker(c)}
-            ${renderButton(c)}
-            <div id="reply-content-${c.uuid}">${resData.join('')}</div>
-        </div>`;
-    };
+const resData = await Promise.all(
+    c.replies.map((r)=>renderContent(r))
+);
+
+return `
+<div id="${c.uuid}">
+   ${c.comment}
+   <div>
+      ${resData.join('')}
+   </div>
+</div>
+`;
+
+};
 
     /**
      * @param {ReturnType<typeof dto.getCommentResponse>[]} cs

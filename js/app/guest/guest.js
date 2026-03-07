@@ -30,32 +30,33 @@ export const guest = (() => {
      * @returns {void}
      */
     const countDownDate = () => {
-        const count = (new Date(document.body.getAttribute('data-time').replace(' ', 'T'))).getTime();
+    const count = (new Date(document.body.getAttribute('data-time').replace(' ', 'T'))).getTime();
 
-        /**
-         * @param {number} num 
-         * @returns {string}
-         */
-        const pad = (num) => num < 10 ? `0${num}` : `${num}`;
+    const pad = (num) => num < 10 ? `0${num}` : `${num}`;
 
-        const day = document.getElementById('day');
-        const hour = document.getElementById('hour');
-        const minute = document.getElementById('minute');
-        const second = document.getElementById('second');
+    const day = document.getElementById('day');
+    const hour = document.getElementById('hour');
+    const minute = document.getElementById('minute');
+    const second = document.getElementById('second');
 
-        const updateCountdown = () => {
-            const distance = Math.abs(count - Date.now());
+    // 🔴 kalau countdown tidak ada, hentikan fungsi
+    if (!day || !hour || !minute || !second) {
+        return;
+    }
 
-            day.textContent = pad(Math.floor(distance / (1000 * 60 * 60 * 24)));
-            hour.textContent = pad(Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)));
-            minute.textContent = pad(Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)));
-            second.textContent = pad(Math.floor((distance % (1000 * 60)) / 1000));
+    const updateCountdown = () => {
+        const distance = Math.abs(count - Date.now());
 
-            util.timeOut(updateCountdown, 1000 - (Date.now() % 1000));
-        };
+        day.textContent = pad(Math.floor(distance / (1000 * 60 * 60 * 24)));
+        hour.textContent = pad(Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)));
+        minute.textContent = pad(Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)));
+        second.textContent = pad(Math.floor((distance % (1000 * 60)) / 1000));
 
-        util.timeOut(updateCountdown);
+        util.timeOut(updateCountdown, 1000 - (Date.now() % 1000));
     };
+
+    util.timeOut(updateCountdown);
+};
 
     /**
      * @returns {void}
@@ -170,7 +171,7 @@ export const guest = (() => {
 let autoScrollTimeout = null;
 
 const autoScroll = () => {
-    const scrollStep = 1;
+    const scrollStep = 0.6;
 
     if (scrollInterval) return; // jangan double
 
@@ -180,7 +181,7 @@ const autoScroll = () => {
         if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
             stopAutoScroll();
         }
-    }, 20);
+    }, 16);
 };
 
 const stopAutoScroll = () => {
@@ -199,6 +200,20 @@ const pauseAutoScroll = () => {
         autoScroll();
     }, 3000);
 };
+const bindUserScroll = () => {
+
+    const events = [
+        'wheel',
+        'touchstart',
+        'touchmove',
+        'mousedown',
+        'keydown'
+    ];
+
+    events.forEach(ev => {
+        window.addEventListener(ev, pauseAutoScroll, { passive: true });
+    });
+};
     const open = (button) => {
         button.disabled = true;
         document.body.scrollIntoView({ behavior: 'instant' });
@@ -211,6 +226,7 @@ const pauseAutoScroll = () => {
         util.timeOut(confetti.openAnimation, 1500);
 
         document.dispatchEvent(new Event('undangan.open'));
+          bindUserScroll(); 
         autoScroll();
         util.changeOpacity(document.getElementById('welcome'), false).then((el) => el.remove());
     };
@@ -259,7 +275,52 @@ const pauseAutoScroll = () => {
     /**
      * @returns {void}
      */
-    const closeInformation = () => information.set('info', true);
+   const closeInformation = () => {
+    if (information) {
+        information.set('info', true);
+    }
+};
+const closeLoginPopup = () => {
+    const popup = document.getElementById('login-popup');
+
+    if (popup) {
+        popup.style.display = 'none';
+    }
+};
+const loginAndReply = () => {
+
+    let email = document.getElementById('login-email')?.value;
+    let password = document.getElementById('login-password')?.value;
+
+    fetch('/login.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: 'email=' + encodeURIComponent(email) + '&password=' + encodeURIComponent(password)
+    })
+    .then(r => r.json())
+    .then(res => {
+
+        if (res.status) {
+
+            const popup = document.getElementById('login-popup');
+            if (popup) popup.style.display = 'none';
+
+            /* kirim ulang reply */
+            if (window.sendReply) {
+                window.sendReply();
+            }
+
+        } else {
+            alert(res.message);
+        }
+
+    })
+    .catch(() => {
+        alert('Login gagal');
+    });
+};
 
     /**
      * @returns {void}
@@ -308,23 +369,18 @@ const pauseAutoScroll = () => {
     /**
      * @returns {object}
      */
-    const loaderLibs = () => {
-        progress.add();
+   const loaderLibs = () => {
 
-        /**
-         * @param {{aos: boolean, confetti: boolean}} opt
-         * @returns {void}
-         */
-        const load = (opt) => {
-            loader(opt)
-                .then(() => progress.complete('libs'))
-                .catch(() => progress.invalid('libs'));
-        };
+    progress.add();
 
-        return {
-            load,
-        };
+    const load = (opt) => {
+        loader(opt)
+            .then(() => progress.complete('libs'))
+            .catch(() => progress.invalid('libs'));
     };
+
+    return { load };
+};
 
     /**
      * @returns {Promise<void>}
@@ -355,77 +411,32 @@ const pauseAutoScroll = () => {
     /**
      * @returns {void}
      */
-    const pageLoaded = () => {
-        lang.init();
-        offline.init();
-        comment.init();
-        progress.init();
+const pageLoaded = async () => {
 
-        config = storage('config');
-        information = storage('information');
+    progress.init();
 
-        const vid = video.init();
-        const img = image.init();
-        const aud = audio.init();
-        const lib = loaderLibs();
-        const token = document.body.getAttribute('data-key');
-        const params = new URLSearchParams(window.location.search);
+    // 🔴 TAMBAHKAN INI
+    document.addEventListener('undangan.progress.done', booting);
 
-        window.addEventListener('resize', util.debounce(slide));
-        // Stop auto scroll kalau user interaksi
-        window.addEventListener('wheel', pauseAutoScroll);
-        window.addEventListener('touchstart', pauseAutoScroll);
-        window.addEventListener('keydown', pauseAutoScroll);
+    console.log('INIT COMMENT');
+    console.log(document.getElementById('comments'));
 
-        document.querySelectorAll('a.nav-link').forEach(link => {
-            link.addEventListener('click', pauseAutoScroll);
-        });
-        document.addEventListener('undangan.progress.done', () => booting());
-        document.addEventListener('hide.bs.modal', () => document.activeElement?.blur());
-        document.getElementById('button-modal-download').addEventListener('click', (e) => {
-            img.download(e.currentTarget.getAttribute('data-src'));
-        });
+    document.dispatchEvent(new Event('undangan.session'));
 
-        if (!token || token.length <= 0) {
-            document.getElementById('comment')?.remove();
-            document.querySelector('a.nav-link[href="#comment"]')?.closest('li.nav-item')?.remove();
+    const vid = video.init();
+    const img = image.init();
+    const aud = audio.init();
 
-            vid.load();
-            img.load();
-            aud.load();
-            lib.load({ confetti: document.body.getAttribute('data-confetti') === 'true' });
-        }
+    vid.load();
+    img.load();
+    aud.load();
 
-        if (token && token.length > 0) {
-            // add 2 progress for config and comment.
-            // before img.load();
-            progress.add();
-            progress.add();
+    loaderLibs().load({ confetti: true });
 
-            // if don't have data-src.
-            if (!img.hasDataSrc()) {
-                img.load();
-            }
+   comment.init();
 
-            session.guest(params.get('k') ?? token).then(({ data }) => {
-                document.dispatchEvent(new Event('undangan.session'));
-                progress.complete('config');
-
-                if (img.hasDataSrc()) {
-                    img.load();
-                }
-
-                vid.load();
-                aud.load();
-                lib.load({ confetti: data.is_confetti_animation });
-
-                comment.show()
-                    .then(() => progress.complete('comment'))
-                    .catch(() => progress.invalid('comment'));
-
-            }).catch(() => progress.invalid('config'));
-        }
-    };
+progress.complete('comment');
+};
 
     /**
      * @returns {object}
@@ -433,6 +444,13 @@ const pauseAutoScroll = () => {
     const init = () => {
         theme.init();
         session.init();
+        information = storage('information');
+        config = storage('config');
+        storage('owns');
+        storage('likes');
+        storage('comment');
+        storage('user');
+        storage('session');
 
         if (session.isAdmin()) {
             storage('user').clear();
@@ -447,8 +465,7 @@ const pauseAutoScroll = () => {
                 'image',
                 'video',
                 'audio',
-                'libs',
-                'gif',
+                'libs'
             ]);
         });
 
@@ -461,6 +478,8 @@ const pauseAutoScroll = () => {
                 modal,
                 showStory,
                 closeInformation,
+                closeLoginPopup,
+                loginAndReply
             },
         };
     };

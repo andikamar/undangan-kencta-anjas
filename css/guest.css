@@ -56,7 +56,7 @@ html {
     left: 50%;
     transform: translateX(-50%);
     width: 48%;
-    height: 39%;
+    height: 40%;
     border-radius: 50% / 60%;
     overflow: hidden;
     z-index: 1;
@@ -80,7 +80,7 @@ html {
     left: 50%;
     transform: translateX(-50%);
     width: 48%;
-    height: 40%;
+    height: 41%;
     border-radius: 50% / 60%;
     overflow: hidden;
     z-index: 1;
@@ -494,7 +494,7 @@ svg {
 /* KIRI */
 .s1{ top:8%;  left:16%; width:32%; height:17%; }
 .s2{ top:25%; left:16%; width:32%; height:18%; }
-.s3{ top:42%; left:17%; width:31%; height:19%; }
+.s3{ top:42%; left:17%; width:31%; height:18%; }
 
 /* KANAN */
 .s4{ top:37%; left:53%; width:32%; height:17%; }
@@ -669,10 +669,10 @@ svg {
 /* Foto di dalam cermin */
 .mirror-photo {
     position: absolute;
-    top: 50%;
+    top: 51%;
     left: 50%;
     width: 75%;
-    height: 76%;
+    height: 77%;
     transform: translate(-50%, -50%);
     border-radius: 50%;
     overflow: hidden;
@@ -825,7 +825,7 @@ svg {
 }
 
 /* SETIAP ITEM KOMENTAR */
-.comment-item {
+.comment-card {
     background-color: #ffffff;
     border: 1.5px solid #C88FA0;;
     border-radius: 20px;
@@ -835,7 +835,7 @@ svg {
     transition: 0.3s ease;
 }
 
-.comment-item:hover {
+.comment-card:hover {
     transform: translateY(-2px);
 }
 #comment .form-label {
@@ -862,8 +862,23 @@ svg {
 }
 
 /* UCAPAN (biasanya p atau span isi teks) */
-#comments p {
+.comment-text{
     color: #5f7d6d !important;  /* sage green */
+     text-align: left !important;
+    display: block;
+    width: 100%;
+    margin-left: 0 !important;
+}
+.comment-card{
+    text-align:left;
+}
+
+.comment-card p{
+    text-align:left !important;
+}
+#comments p[id^="content-"]{
+    width:100%;
+    max-width:100%;
 }
 #comments hr {
     border: none;
@@ -898,4 +913,169 @@ svg {
 #comments button span,
 #comments button {
     color: #5f7d6d !important; /* sage green */
+}
+/* HEADER KOMENTAR FIX */
+#comments .comment-header{
+    display:grid !important;
+    grid-template-columns: auto 1fr auto;
+    align-items:center;
+    width:100%;
+}
+
+/* kiri (nama + badge + icon) */
+#comments .comment-left{
+    display:flex;
+    align-items:center;
+    gap:6px;
+    min-width:0;
+}
+
+/* jam */
+#comments .comment-time{
+    justify-self:end;
+    font-size:12px;
+    color:#C88FA0;
+    white-space:nowrap;
+}
+
+/* teks komentar */
+#comments .comment-left{
+    width:auto !important;
+    flex:0 1 auto !important;
+}
+#comments .comment-text{
+text-align:left !important;
+margin-left:0 !important;
+margin-right:auto !important;
+display:block;
+width:100%;
+}
+
+#comments .comment-card p{
+text-align:left !important;
+}
+#comments .comment-text{
+    text-align:left !important;
+    width:100% !important;
+}
+
+#comments p[id^="content-"]{
+    text-align:left !important;
+    width:100% !important;
+    max-width:100% !important;
+}
+
+#comments .comment-card{
+    display:block !important;
+}
+
+#comments .comment-card p{
+    margin-left:0 !important;
+}
+#comments .comment-text{
+    text-align:left !important;
+    display:block;
+    width:100%;
+    margin:0;
+}
+.reply-textarea{
+    width:100%;
+    background:#1f2328;
+    color:#ffffff;
+    border:none;
+    border-radius:20px;
+    padding:14px 16px;
+    min-height:90px;
+    font-size:14px;
+    box-shadow:0 8px 18px rgba(0,0,0,0.2);
+}
+
+.reply-textarea::placeholder{
+    color:#9aa4a6;
+}
+.reply-box{
+    margin-top:10px;
+}
+.reply-input-wrapper{
+    position:relative;
+}
+
+.reply-actions{
+    display:flex;
+    justify-content:flex-end;
+    gap:10px;
+    margin-top:10px;
+}
+
+.btn-cancel,
+.btn-send{
+    border:1.5px solid #C88FA0;
+    background:#ffffff;
+    color:#5f7d6d;
+    border-radius:20px;
+    padding:4px 14px;
+    font-size:13px;
+}
+
+.btn-send{
+    font-weight:600;
+}
+.comment-like{
+    border-radius:18px !important;
+    padding:2px 10px !important;
+}
+.login-box{
+background:#ffffff;
+padding:30px;
+border-radius:10px;
+box-shadow:0 4px 15px rgba(0,0,0,0.1);
+width:90%;
+max-width:350px;
+}
+
+.login-box h2{
+margin-bottom:20px;
+text-align:center;
+}
+
+.login-box input{
+width:100%;
+padding:10px;
+margin-bottom:15px;
+border:1px solid #ccc;
+border-radius:6px;
+font-size:14px;
+}
+
+.login-box button{
+width:100%;
+padding:10px;
+background:#4E7C59;
+border:none;
+color:white;
+border-radius:6px;
+font-size:16px;
+cursor:pointer;
+}
+
+.login-box button:hover{
+    width:100%;
+    background:#1f2328;
+    color:#ffffff;
+    border:none;
+    border-radius:20px;
+    padding:14px 16px;
+    min-height:90px;
+    font-size:14px;
+    box-shadow:0 8px 18px rgba(0,0,0,0.2);
+}
+@keyframes fadeIn{
+from{
+opacity:0;
+transform:scale(.95);
+}
+to{
+opacity:1;
+transform:scale(1);
+}
 }
