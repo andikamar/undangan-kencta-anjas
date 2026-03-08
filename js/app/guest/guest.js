@@ -171,17 +171,25 @@ export const guest = (() => {
 let autoScrollTimeout = null;
 
 const autoScroll = () => {
-    const scrollStep = 0.6;
 
-    if (scrollInterval) return; // jangan double
+    const container = document.querySelector("main");
+
+    if (!container) return;
+
+    if (scrollInterval) return;
 
     scrollInterval = setInterval(() => {
-        window.scrollBy(0, scrollStep);
 
-        if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+        container.scrollTop += 1;
+
+        if (
+            container.scrollTop + container.clientHeight >=
+            container.scrollHeight
+        ) {
             stopAutoScroll();
         }
-    }, 16);
+
+    }, 30);
 };
 
 const stopAutoScroll = () => {
