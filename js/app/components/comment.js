@@ -387,5 +387,5 @@ const showReplies = (uuid) => {
     show();
 };
 
-    return { init, send, reply, sendReply, remove, update, showOrHide, show, showReplies, pagination };
+    return { init, send, reply, sendReply, remove, update, showOrHide, show, showReplies, pagination, like };
 })();
