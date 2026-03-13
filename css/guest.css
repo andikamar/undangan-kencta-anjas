@@ -215,8 +215,8 @@ svg {
 .ayat-text {
     font-family: 'Quicksand', sans-serif;
     font-weight: 500;
-    font-size: 14px;
-    line-height: 2;
+    font-size: 13.6px;
+    line-height: 1.6;
     color: #516D5C;
     padding: 0 8px;
 }
@@ -225,7 +225,8 @@ svg {
     font-family: 'Quicksand', sans-serif;
     font-weight: 500;
     margin-top: 20px;
-    font-size: 13px; 
+    font-size: 13.6px;
+    line-height: 1.6;
     color: #516D5C;
 }
 
@@ -1170,4 +1171,7 @@ main {
     height: 100vh;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
+}
+.countdown-shadow{
+    box-shadow: 0 6px 20px rgba(0,0,0,0.05);
 }
