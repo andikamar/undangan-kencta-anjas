@@ -30,6 +30,8 @@ export const audio = (() => {
             audioEl.muted = false;
             audioEl.autoplay = false;
             audioEl.controls = false;
+            audioEl.preload = 'auto';
+            audioEl.load();
 
             progress.complete('audio');
         } catch {
@@ -39,6 +41,19 @@ export const audio = (() => {
 
         let isPlay = false;
         const music = document.getElementById('button-music');
+        document.addEventListener('click', async () => {
+        if (!isPlay) {
+            try { await play(); } catch(e) {}
+        }
+    }, { once: true });
+
+    // Event custom untuk menampilkan tombol dan autoplay jika diizinkan
+    document.addEventListener('undangan.open', () => {
+        music.classList.remove('d-none');
+        if (playOnOpen) {
+            play(); // ini bisa gagal jika belum ada klik, tapi listener di atas akan unlock
+        }
+    });
 
         /**
          * @returns {Promise<void>}
